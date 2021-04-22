@@ -1,0 +1,26 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zealpush Notification plugin for Craft CMS
+ *
+ * ZealpushNotificationField Field Settings
+ *
+ * @author    ZealousWeb
+ * @copyright Copyright (c) 2021 ZealousWeb
+ * @link      https://www.zealousweb.com
+ * @package   ZealpushNotification
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("zealouswebcraftcms\\zealpushnotification\\assetbundles\\zealpushnotification\\ZealpushNotificationAsset") %}
+
+{{ forms.textField({
+    label: 'Some Attribute',
+    instructions: 'Enter some attribute here.',
+    id: 'someAttribute',
+    name: 'someAttribute',
+    value: field['someAttribute']})
+}}

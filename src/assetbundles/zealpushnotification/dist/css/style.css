@@ -1,0 +1,196 @@
+/*-- -Flash msg--- */
+p.message{
+    color:black;
+}
+.success{  
+    padding: 10px 8px;
+    border-radius: 10px;
+    border: 2px solid #6afd58;
+    background-color: #9bff7a9e;
+	text-align: center;
+	font-size:15px;
+}
+/*-- search bar--- */
+input[type=text] {
+	float:left;
+	margin-bottom:5px;
+	border:2px solid black;
+	border-radius: 5px;
+	padding: 5px;
+	font-size: 14px;
+}
+
+/*---Table--- */
+table, td, th {
+	/* border: 1px solid black; */
+}
+table {
+	border-collapse: collapse;
+	width: 100%;
+	padding-top: 8px;
+    padding-bottom: 8px;
+}
+.heading th .desc,  .heading th .asc{
+	/* background-color: #cdd8e4; */
+	position: relative;
+	/* padding-right: 26px; */
+}
+.heading th{
+	/* height: 15px;
+	text-align: center;
+	color:#47515a;
+	color:black;
+	background-color:#CDD8E4; */
+
+	padding-top: 14px !important;
+    padding-bottom: 14px !important;
+    width: auto;
+    background-color: #f3f7fc;
+    cursor: default;
+	font-weight: bold;	
+	text-align: left;
+	white-space: nowrap;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+th a{
+	/* color:#47515a; */
+	/* color:black; */
+}
+th a:hover{
+	text-decoration: none;
+}
+
+table:not(.data) th:not(:last-child){
+	text-align: center;
+	padding-right: 12px;
+    padding-left: 12px;
+}
+table:not(.data) td {
+	padding-right: 12px;
+	padding-left: 12px;
+	text-align: center;
+	color: black;
+	font-size:15px;
+}
+/*----Status button---- */
+#change{
+	padding:5px;
+}
+.delete {
+	/* border: none; 
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	color: rgb(240, 228, 228);
+	background-color: #616263; */
+}
+
+.view{
+	border: none; 
+	padding: 8px 16px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 16px;
+	color: rgb(240, 228, 228);
+	background-color: rgb(184, 24, 24);
+}
+/*---pagination--- */
+ul.pagination {
+	display: flex;
+	color:black;
+	list-style: none;
+}
+
+.pagination a:hover{
+	text-decoration: none;
+	color: white;
+	background-color:rgb(58, 125, 151);
+}
+
+/*----- Modal popup------ */
+.modaltest {
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	z-index: 1; /* Sit on top */
+	padding-top: 100px; /* Location of the box */
+	left: 65px;
+	top: 0;
+	width: 100%; /* Full width */
+	height: 100%; /* Full height */
+	overflow: auto; /* Enable scroll if needed */
+	background-color: rgb(0,0,0); /* Fallback color */
+	background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+  
+  
+/* Modal Content */
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 50px;
+	border: 5px solid rgb(58, 125, 151);;
+	width: 50%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s,
+	overflow: scroll,
+}
+  
+  
+  /* Add Animation */
+  @-webkit-keyframes animatetop {
+	from {top:-300px; opacity:0} 
+	to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+	from {top:-300px; opacity:0}
+	to {top:0; opacity:1}
+  }
+
+.modal-body {
+	padding: 10px 12px;
+ }
+
+
+/* The Close Button */
+.close {
+	color: #000;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+	color: rgb(58, 125, 151);
+	text-decoration: none;
+	cursor: pointer;
+  }
+
+/* Divyangini Patel */
+.addNotificationBtn {
+	text-decoration: none;
+}
+
+#notificationFilterField {
+	border: 1px solid rgba(96, 125, 159, 0.25);
+    background-color: #fbfcfe;
+}
+.notificationBlock .texticon {
+	padding-bottom: 50px;
+}
+.notificationTextModal {
+	padding-top: 180px !important;
+} 
+.tableview #notificationsIcon .delete {
+	display: none !important;
+}
+.tableview #notificationsBannerImage .delete {
+	display: none !important;
+}

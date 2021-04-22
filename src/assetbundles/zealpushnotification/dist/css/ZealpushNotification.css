@@ -1,0 +1,116 @@
+/**
+ * Zealpush Notification plugin for Craft CMS
+ *
+ * Zealpush Notification CSS
+ *
+ * @author    ZealousWeb
+ * @copyright Copyright (c) 2021 ZealousWeb
+ * @link      https://www.zealousweb.com
+ * @package   ZealpushNotification
+ * @since     1.0.0
+ */
+ .notifications, .notificationTextModal {
+	display: none; 
+	position: fixed; 
+	z-index: 1; 
+	padding-top: 100px;
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0,0,0); 
+	background-color: rgba(0,0,0,0.4);
+     z-index: 999;
+  }
+  
+.notifications .modal-content {
+	position: relative;
+	background-color: #fefefe;
+	margin: auto;
+	padding: 3vw;
+	border: 5px solid rgb(58, 112, 133);
+	width: 50%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s;
+     box-sizing: border-box;
+    width: 90vw;
+    max-width: 900px;
+    max-height: 83vh;
+    overflow: auto;
+}
+
+.notifications .modal-content pre{
+    width: 100%;
+    overflow: auto
+}
+  
+  
+  
+  @-webkit-keyframes animatetop {
+	from {top:-300px; opacity:0} 
+	to {top:0; opacity:1}
+  }
+  
+  @keyframes animatetop {
+	from {top:-300px; opacity:0}
+	to {top:0; opacity:1}
+  }
+
+.modal-body {
+	padding: 10px 12px;
+ }
+
+.close {
+    color: #000;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: rgb(58, 125, 151);
+    text-decoration: none;
+    cursor: pointer;
+}
+.error-span {
+	color:red;
+}
+.invalid-feedback {
+	color:red;
+}
+
+/* Mehul Gediya */
+.configuration_row{
+	display: flex;
+	flex-wrap: wrap;
+	margin-left: -15px;
+	margin-right: -15px;
+}
+.configuration_row-left{
+	width:48%; 
+	border-right: 1px solid #f0f8ff;
+	padding: 15px;
+	box-sizing: border-box;
+}
+.configuration_row-left input[type=text]{
+	width: 100%;
+}
+.configuration_row-right{
+	width: 50%;
+	padding: 15px;
+	box-sizing: border-box;
+}
+
+@media (max-width:767px) {
+	.configuration_row-left{
+		width: 100%;
+	}
+	.configuration_row-right{
+		width: 100%;
+	}
+}

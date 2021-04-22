@@ -1,0 +1,79 @@
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-messaging.js"></script>
+
+<script>
+    // Initialize Firebase
+    // TODO: Replace with your project's customized code snippet
+    var apikey = '{{settings["apiKey"]}}';
+    var authDomain = '{{settings["authDomain"]}}';
+    var projectId = '{{settings["projectId"]}}';
+    var storageBucket = '{{settings["storageBucket"]}}';
+    var messagingSenderId = '{{settings["messagingSenderId"]}}';
+    var appId = '{{settings["appId"]}}';
+    
+    var config = {
+        'apiKey': apikey,
+        'authDomain': authDomain,
+        'projectId': projectId,
+        'storageBucket': storageBucket,
+        'messagingSenderId': messagingSenderId,
+        'appId': appId,
+        
+    };
+    
+    firebase.initializeApp(config);
+
+    const messaging = firebase.messaging();
+    messaging
+        .requestPermission()
+        .then(function () {            
+            // get the token in the form of promise
+            return messaging.getToken()
+        })
+        .then(function(token) { 
+            // Save token code goes here       
+            saveToken(token);                      
+        })
+        .catch(function (err) {           
+            
+        });
+
+        messaging.onMessage(function(payload) {
+            
+            var notificationTitle = payload.data.title;
+            
+            const notificationOptions = {
+                body: payload.data.body,
+                icon: payload.data.icon,
+                image: payload.data.image,
+                click_action: payload.data.click_action, // To handle notification click when notification is moved to notification tray
+                data: {
+                    click_action: payload.data.click_action,
+                    image: payload.data.image,
+                }
+            };
+            var notification = new Notification(notificationTitle,notificationOptions);
+        });
+        
+    function saveToken(currentToken) {     
+        var url = "{{ actionUrl('zealpush-notification/default/save-token')}}";     
+        window.csrfTokenName = "{{ craft.app.config.general.csrfTokenName }}";
+        window.csrfTokenValue = "{{ craft.app.request.csrfToken }}";    
+        var data = { token: currentToken };
+        data[window.csrfTokenName] =window.csrfTokenValue; 
+               
+        $.ajax({
+            type: "POST",
+            url: url,
+            data:data,
+            dataType: "html", //expect html to be returned                
+            success: function (response) {
+                     
+            }
+        });
+    }
+ 
+</script>
+
+

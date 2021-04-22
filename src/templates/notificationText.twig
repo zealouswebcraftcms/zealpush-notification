@@ -1,0 +1,12 @@
+{% do view.registerAssetBundle("zealouswebcraftcms\\zealpushnotification\\assetbundles\\zealpushnotification\\ZealpushNotificationAsset") %}
+<a href="javascript:void(0);" class="notificationTextMessage" rel-id="{{ id }}" rel-val="{{notificationsText}}"> {{ notificationsText|slice(0,20) ~ '...'}} </a>
+
+<div class="notificationTextModal" id="notificationTextModal" style="display:none">
+    <div class="modal-content">
+            <span class="close" id="hideNotificationModal">&times;</span>
+        <div class="modal-body">
+            <p class="notificationTextFullMessage"></p>
+        </div>
+    </div>
+</div>
+

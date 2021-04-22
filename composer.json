@@ -1,0 +1,49 @@
+{
+    "name": "zealouswebcraftcms/zealpush-notification",
+    "description": "Zealpush Notification",
+    "type": "craft-plugin",
+    "version": "1.0.0",
+    "keywords": [
+        "craft",
+        "cms",
+        "craftcms",
+        "craft-plugin",
+        "zealpush notification"
+    ],
+    "support": {
+        "docs": "https://github.com/zealouswebcraftcms/zealpush-notification/blob/main/README.md",
+        "issues": "https://github.com/zealouswebcraftcms/zealpush-notification/issues"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "ZealousWeb",
+            "homepage": "https://www.zealousweb.com"
+        }
+    ],
+    "require": {
+        "craftcms/cms": "^3.0.0"
+    },
+    "require-dev": {
+      "craftcms/cms": "^3.2.0",
+      "codeception/codeception": "^3.0",
+      "vlucas/phpdotenv": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+          "zealouswebcraftcms\\zealpushnotification\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Zealpush Notification",
+        "handle": "zealpush-notification",
+        "developer": "ZealousWeb",
+        "developerUrl": "https://www.zealousweb.com",
+        "documentationUrl": "https://github.com/zealouswebcraftcms/zealpush-notification/blob/main/README.md",
+        "changelogUrl": "https://github.com/zealouswebcraftcms/zealpush-notification/blob/main/CHANGELOG.md",
+        "components": {
+            "zealpushNotificationService": "zealouswebcraftcms\\zealpushnotification\\services\\ZealpushNotificationService"
+        },
+        "class": "zealouswebcraftcms\\zealpushnotification\\ZealpushNotification"
+    }
+}

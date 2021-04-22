@@ -1,0 +1,24 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zealpush Notification plugin for Craft CMS 3.x
+ *
+ * Zealpush Notification index.twig
+ *
+ * @author    ZealousWeb
+ * @copyright Copyright (c) 2021 ZealousWeb
+ * @link      https://www.zealousweb.com
+ * @package   ZealpushNotification
+ * @since     1.0.0
+ */
+#}
+
+{% extends '_layouts/elementindex' %}
+
+{% set title = "Zealpush Notification" %}
+
+{% set elementType = "zealouswebcraftcms\\zealpushnotification\\elements\\WebNotificationElements" %}
+
+{% block actionButton %}
+    <a href="{{ url('get-notification-data-for-save') }}"  class="btn submit add icon addNotificationBtn">Add Notification</a>
+{% endblock %}

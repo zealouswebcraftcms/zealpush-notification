@@ -1,0 +1,173 @@
+
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Web Notifications  plugin for Craft CMS 3.x
+ *
+ * Web Notifications  index.twig
+ *
+ * @author    Zealousweb
+ * @copyright Copyright (c) 2021 Zealousweb
+ * @link      Zealousweb.com
+ * @package   WebNotifications
+ * @since     1.0.0
+ */
+#}
+
+{% extends "_layouts/cp" %}
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("zealouswebcraftcms\\zealpushnotification\\assetbundles\\zealpushnotification\\ZealpushNotificationAsset") %}
+{% do view.registerAssetBundle("zealouswebcraftcms\\zealpushnotification\\assetbundles\\indexcpsection\\IndexCPSectionAsset") %}
+
+{# Link for the ? icon at the bottom of the page #}
+{% set docsUrl = "???" %}
+
+{# The title of this CP section #}
+{% set title = "Add Web Notification" %}
+
+{# The URL to this plugin's base CP section #}
+{% set pluginCpUrl = url('zealpush-notification') %}
+
+{% set assetsService = craft.app.getAssets() %}
+
+{# Get a URL to an image in our AssetBundle #}
+{% set iconUrl = view.getAssetManager().getPublishedUrl('@zealouswebcraftcms/zealpushnotification/assetbundles/indexcpsection/dist', true) ~ '/img/Index-icon.svg' %}
+
+{# Content that should appear in the page header#}
+{% set extraPageHeaderHtml %}
+    <div class="buttons">
+        <a href="{{ pluginCpUrl }}" class="btn submit add icon">{{ "Click Me!"|t('zealpush-notification') }}</a>
+    </div>
+{% endset %}
+
+{# The content of the CP Section#}
+{% set content %}
+    
+    {% from _self import errorList %}
+
+    <form method="POST" action="" accept-charset="UTF-8" id="user_form" enctype="multipart/form-data">
+        {{ csrfInput() }}
+        {{ actionInput('zealpush-notification/default/save-entry') }} 
+
+        {{ forms.textField({
+                first: true,
+                label: "Notifcation Title",
+                instructions: "Enter notifcation title.",
+                id: 'notificationsTitle',
+                name: 'notificationsTitle',
+                required: true,
+                value: record.notificationsTitle|trim,
+                errors: record.getErrors('notificationsTitle'),
+            }) 
+        }}   
+
+        {{ forms.textField({
+                label: "Notifcation Text",
+                instructions: "Enter notifcation text.",
+                id: 'notificationsText',
+                name: 'notificationsText',
+                required: true,
+                value: record.notificationsText|trim,
+                errors: record.getErrors('notificationsText'),
+            
+            }) 
+        }}   
+        
+        {{ forms.textField({
+                label: "Notifcation Url",
+                instructions: "Enter notifcation url.",
+                id: 'notificationsUrl',
+                name: 'notificationsUrl',
+                placeholder: 'https://yoursite.com',
+                value: record.notificationsUrl|trim,
+                errors: record.getErrors('notificationsUrl'),
+            }) 
+        }}  
+
+        <div id="notificationsIcon-field" class="field form-group">
+            <div class="heading">
+                <label id="notificationsIcon-label" for="notificationsIcon">Notifcation Icon</label>
+            </div>
+            <div id="notificationsIcon-instructions" class="instructions"><p>Select asset or upload your local image.</p></div>
+            <div class="input ltr">  
+                
+                {% set icon_volume = craft.app.getVolumes().getVolumeByHandle('zealiconimage') %}
+                {% set icon_folder = assetsService.getRootFolderByVolumeId(icon_volume['id']) %}
+
+                {{ forms.elementSelectField({
+                        elements: icon_assets,
+                        id: 'notifications-icon',
+                        name: 'notificationsIcon',
+                        elementType: elementType,
+                        sources: ['folder:'~icon_folder.uid],
+                        jsClass: 'Craft.AssetSelectInput',
+                        selectionLabel: 'Select Image',
+                        viewMode: 'small',
+                        limit: 1,
+                        errors: record.getErrors('notificationsIcon'),
+                    }) 
+                }}
+            </div>
+        </div>
+
+        <div id="notificationsBannerImage-field" class="field form-group">
+            <div class="heading">
+                <label id="notificationsBannerImage-label" for="notificationsBannerImage">Banner Image</label>
+            </div>
+            <div id="notificationsBannerImage-instructions" class="instructions"><p>Select asset or upload your local image.</p></div>
+            <div class="input ltr"> 
+            
+                {% set banner_volume = craft.app.getVolumes().getVolumeByHandle('zealbannerimage') %}
+                {% set banner_folder = assetsService.getRootFolderByVolumeId(banner_volume['id']) %}
+                
+                {{ forms.elementSelectField({
+                        elements: banner_assets,
+                        id: 'banner-image',
+                        name: 'notificationsBannerImage',
+                        elementType: elementType,
+                        sources:['folder:'~banner_folder.uid],
+                        jsClass: 'Craft.AssetSelectInput',
+                        selectionLabel: 'Select Image',
+                        viewMode: 'small',
+                        limit: 1,
+                        errors: record.getErrors('notificationsBannerImage'),
+                    }) 
+                }}
+            </div>
+        </div>
+
+        {{ forms.selectField({
+            label: "Status",
+            instructions: "If you want to send a notification, select Active Status.",
+            id: 'notificationsStatus',
+            name: 'notificationsStatus',
+            options: {
+                Active: 'Active',
+                Inactive: 'Inactive',
+            },
+            value: ((record|length) ? record.notificationsStatus : Active),
+            errors: record.getErrors('notificationsStatus'),
+        }) }}
+        
+        <button type="submit" class="btn submit submit-btn-class" id="submit">Notify</button>
+        <a href="{{ url('zealpush-notification') }}" class="btn btn-primary" >Cancel</a>
+    </form>
+    
+    {% block javascript %}
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"  crossorigin="anonymous"></script>
+        <script type="text/javascript">
+            $( document ).ready(function() {
+                $("#notificationsStatus").on('change', function() {
+                    if($(this).val() == 'Inactive') {
+                        $('.submit-btn-class').text('Save');
+                    } else {
+                        $('.submit-btn-class').text('Notify');
+                    }
+                })
+            })
+        </script>
+    {% endblock %}
+
+{% endset %}
+

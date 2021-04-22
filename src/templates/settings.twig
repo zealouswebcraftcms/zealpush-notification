@@ -1,0 +1,272 @@
+{# @var craft \craft\web\twig\variables\CraftVariable #}
+{#
+/**
+ * Zealpush Notification plugin for Craft CMS 3.x
+ *
+ * Zealpush Notification Settings.twig
+ *
+ * @author    ZealousWeb
+ * @copyright Copyright (c) 2021 ZealousWeb
+ * @link      https://www.zealousweb.com
+ * @package   ZealpushNotification
+ * @since     1.0.0
+ */
+#}
+
+{% import "_includes/forms" as forms %}
+
+{% do view.registerAssetBundle("zealouswebcraftcms\\zealpushnotification\\assetbundles\\zealpushnotification\\ZealpushNotificationAsset") %}
+
+ <a href="javascript:void(0);"  class="btn btn-primary"  style="margin-bottom:20px;" id="myBtn" onclick="show()">How to Create Firebase Account</a>
+    
+    <div class="notifications" id="myModal" style="display:none">
+        <div class="modal-content">
+            <span class="close" onclick="hide()">&times;</span>
+            <div class="modal-body">
+                <h2> How to create the Firebase account? </h2>
+                <p> Go to <a href="https://console.firebase.google.com">Firebase Console</a> and add a new project or use an existing one. </p>
+                <p> Once your project has been created, then add a web app to your project. Register your web app by adding a name to the app, then click on continue to console. </p>
+                <p> Go to the Project Settings by pressing the settings icon beside the "Project Overview" at the left top corner. </p> 
+                <p> In the "General" tab, you will find a newly added web app config panel. Find "Firebase SDK snippet" and select the "Config" radio button to get the configuration keys. </p> 
+                <p> After selecting the "Config" radio button, you will get the configuration script as a JSON Object with apiKey, authDomain, projectId, storageBucket, messagingSenderId, and appId in it.</p>
+                <p> Now you need to copy the exact part from the config script as shown below and paste it in the "Configuration Json Data" text area in the plugin's Settings page.
+                <pre>
+                    <code>
+                    {
+                        apiKey: "***********",
+                        authDomain: "***********",
+                        projectId: "***********",
+                        storageBucket: "***********",
+                        messagingSenderId: "***********",
+                        appId: "***********"
+                    }
+                    </code>
+                </pre>
+                <p> OR </p> 
+                <p> You can fill individual values in the input boxes in the "Configuration" panel as well. </p>
+                <p> In the firebase project, on the project setting page, go to the "Cloud Messaging" tab and copy the "Server key" from the "Project credentials" panel and paste it into the setting page "Server Key" field. </p>
+            </div>
+        </div>
+    </div>
+
+{{ forms.textField({
+        label: 'Server Key',
+        id: 'serverKey',
+        name: 'serverKey',
+        class: 'serverKey',
+        required: true,
+        autofocus: true,     
+        value: settings.serverKey,               
+        errors: settings.getErrors('serverKey')
+    })
+}}
+<div class="configuration_row">
+    <div class="configuration_row-left"><h1>Configuration</h1>
+       
+        {{ forms.textField({
+                label: 'Api Key',
+                id: 'apiKey',
+                name: 'apiKey',
+                class: 'apiKey',
+                required: true,
+                suggestEnvVars: true,
+                autofocus: true,     
+                size:80,
+                value: settings.apiKey,               
+                errors: settings.getErrors('apiKey')
+            })
+        }}
+
+        {{ forms.textField({
+                label: 'Auth Domain',
+                id: 'authDomain',
+                name: 'authDomain',
+                class: 'authDomain',
+                required: true,
+                suggestEnvVars: true,
+                autofocus: true,     
+                size:80,
+                value: settings.authDomain,
+                errors: settings.getErrors('authDomain')
+            })
+        }}
+
+        {{ forms.textField({
+                label: 'Messaging Sender Id',
+                id: 'messagingSenderId',
+                name: 'messagingSenderId',
+                class: 'messagingSenderId',
+                required: true,
+                suggestEnvVars: true,
+                autofocus: true,    
+                size:80, 
+                value: settings.messagingSenderId,
+                errors: settings.getErrors('messagingSenderId')
+            })
+        }}
+
+        {{ forms.textField({
+                label: 'App Id',   
+                id: 'appId',
+                name: 'appId',
+                class: 'appId',
+                required: true,
+                suggestEnvVars: true,
+                autofocus: true,   
+                size:80,  
+                value: settings.appId,
+                errors: settings.getErrors('appId')
+            })
+        }}
+
+        {{ forms.textField({
+                label: 'Project Id',
+                id: 'projectId',
+                name: 'projectId',
+                class: 'projectId',
+                required: true,
+                suggestEnvVars: true,
+                autofocus: true,     
+                size:80,
+                value: settings.projectId,
+                errors: settings.getErrors('projectId')
+            })
+        }}
+
+        
+
+        {{ forms.textField({
+                label: 'Storage Bucket',
+                id: 'storageBucket',
+                name: 'storageBucket',
+                class: 'storageBucket',
+                required: true,
+                suggestEnvVars: true,
+                autofocus: true, 
+                size:80,    
+                value: settings.storageBucket,
+                errors: settings.getErrors('storageBucket')
+            })
+        }}
+
+    </div>
+    
+    <div class="configuration_row-right">      
+       <h1>Configuration Json Data</h1>  
+         <div id="notificationsTitle-field" class="field form-group">                
+            <div class="heading">
+                <label id="notificationsTitle-label"  for="notificationsTitle">Json Data</label>
+            </div>
+            <div id="notificationsTitle-instructions" class="notificationsTitle-instructions" style="color:red"></div>
+            <div class="input ltr">                
+                <textarea id="JsonData" class="jsonData text fullwidth" name="JsonData" rows="20" cols="50" autofocus="" aria-describedby="JsonData-instructions" spellcheck="false"></textarea>           
+            </div>    
+        </div>        
+    </div>
+</div>
+<br><br>
+{% if settings.apiKey is not empty %}
+    <div class="js-download-link-block">
+        <h2>Download file: </h2><p> Please download the file and place it in the server base root folder.</p>
+        <a href="javascript: void(0)" class="download-file-id" id="download-file-id">Click here..</a>
+    </div>
+    
+{% endif %}
+    
+{% block javascript %}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"  crossorigin="anonymous"></script>
+<script type="text/javascript">
+        
+    function show(){
+        $(".notifications").show();
+    }        
+    function hide(){
+        $(".notifications").hide()
+    } 
+    var isValid;
+      
+    $(document).on('change', '.jsonData', function() {
+        var element = $(this);
+        var str = element.val();         
+        isJson(str);
+    });
+    var js_url = '{{current_site_path}}/vendor/zealouswebcraftcms/zealpush-notification/src/assetbundles/zealpushnotification/dist/js/firebase-messaging-sw.js';
+
+    $('.download-file-id').on('click', function(){
+        $.get(js_url, function(data) {
+            do_something_with(data);
+        }, 'text');
+    });
+
+    function do_something_with(data) {
+        var data_string = data;
+
+        var apiKey = $('.apiKey').val();  
+        var authDomain = $('.authDomain').val();  
+        var projectId = $('.projectId').val();  
+        var storageBucket = $('.storageBucket').val();  
+        var messagingSenderId = $('.messagingSenderId').val();  
+        var appId = $('.appId').val();  
+
+        data_string = data_string.replace(/{api_key}/g, apiKey);
+        data_string = data_string.replace(/{auth_domain}/g, authDomain);
+        data_string = data_string.replace(/{project_id}/g, projectId);
+        data_string = data_string.replace(/{storage_bucket}/g, storageBucket);
+        data_string = data_string.replace(/{messaging_sender_id}/g, messagingSenderId);
+        data_string = data_string.replace(/{app_id}/g, appId);
+        
+        var filename = "firebase-messaging-sw.js";
+
+        download(filename, data_string);
+    }
+
+    function download(filename, data_string) {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/javascript;charset=utf-8,' + encodeURIComponent(data_string));
+        element.setAttribute('download', filename);
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+    function isJson(str) {
+        try {
+            JSON.parse(str);            
+        } catch (e) {
+            str.replace(/(\s*?{\s*?|\s*?,\s*?)(['"])?([a-zA-Z0-9]+)(['"])?:/g, '$1"$3":');
+            eval('var json = new Object(' + str + ')');
+            str = JSON.stringify(json); 
+            
+            try {
+                JSON.parse(str);            
+            } catch (e) {
+                $('.notificationsTitle-instructions').html('<p>Please enter valid json data.</p>');
+                return false;
+            }
+        }        
+        var response=jQuery.parseJSON(str);
+        var size = Object.keys(response).length;
+        if ('apiKey', 'authDomain', 'projectId', 'storageBucket', 'messagingSenderId', 'appId' in response) {         
+            if(typeof response =='object') {
+                $('.notificationsTitle-instructions').html('');
+                $.each(response , function(index, val) {                                                                         
+                    $('.'+index).val(val);
+                });           
+            }
+            else {   
+                $('#form1 input[type="text"]').val('');                        
+                $('.notificationsTitle-instructions').html('<p>Given data is not a json data.</p>');
+            }
+        } else {
+            $('.notificationsTitle-instructions').html('<p>Not a valid key value pair as define in firebase console account.</p>');
+        }
+        return false;
+    }
+    
+</script>
+
+{% endblock %}

@@ -1,0 +1,38 @@
+
+{% import "_includes/forms" as forms %}
+{% do view.registerAssetBundle("zealouswebcraftcms\\zealpushnotification\\assetbundles\\zealpushnotification\\ZealpushNotificationAsset") %}
+
+{% set assetsService = craft.app.getAssets() %}
+
+{% set icon_volume = craft.app.getVolumes().getVolumeByHandle('zealiconimage') %}
+{% set icon_folder = assetsService.getRootFolderByVolumeId(icon_volume['id']) %}
+
+{% if icon_assets is defined %}
+    {{ forms.elementSelectField({
+        elements: icon_assets,
+        id: 'notificationsIcon',
+        name: 'notificationsIcon',
+        elementType: elementType,
+        sources: ['folder:'~icon_folder.uid],
+        jsClass: 'Craft.AssetSelectInput',
+        selectionLabel: 'Select Image',
+        viewMode: 'small',
+        limit: 1,
+    }) }}
+{% endif %}
+
+{% set banner_volume = craft.app.getVolumes().getVolumeByHandle('zealbannerimage') %}
+{% set banner_folder = assetsService.getRootFolderByVolumeId(banner_volume['id']) %}
+{% if banner_assets is defined %}
+    {{ forms.elementSelectField({
+        elements: banner_assets,
+        id: 'notificationsBannerImage',
+        name: 'notificationsBannerImage',
+        elementType: elementType,
+        sources:['folder:'~banner_folder.uid],
+        jsClass: 'Craft.AssetSelectInput',
+        selectionLabel: 'Select Image',
+        viewMode: 'small',
+        limit: 1,
+    }) }}  
+{% endif %}
